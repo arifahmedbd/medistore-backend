@@ -7,4 +7,5 @@ src/generated
 
 
 .DS_Store
+/dist
 dist

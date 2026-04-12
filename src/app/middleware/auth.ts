@@ -1,7 +1,19 @@
 import { NextFunction, Request, Response } from "express";
 import { Role } from "../../generated/enums";
 import { auth as betterAuth } from "../../lib/auth";
-
+declare global {
+  namespace Express {
+    interface Request {
+      user?: {
+        id: string;
+        email: string;
+        name: string;
+        role: string;
+        emailVerified: boolean;
+      };
+    }
+  }
+}
 export const auth =
   (...roles: string[]) =>
   async (req: Request, res: Response, next: NextFunction) => {

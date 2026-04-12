@@ -185,4 +185,4 @@ export const auth = betterAuth({
   },
 
   plugins: [oAuthProxy()],
-});
+}) as any;
