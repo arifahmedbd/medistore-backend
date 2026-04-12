@@ -6,6 +6,10 @@ import path from "path";
 import qs from "qs";
 import { auth } from "./lib/auth";
 import userRouter from "./app/modules/user/user.router";
+import { notFound } from "./app/middleware/notFound";
+import errorHandler from "./app/middleware/globalErrorHandler";
+import { authRoute } from "./app/modules/auth/auth.router";
+import { adminRoute } from "./app/modules/admin/admin.router";
 
 const app: Application = express();
 app.set("query parser", (str: string) => qs.parse(str));
@@ -43,6 +47,8 @@ app.use(express.urlencoded({ extended: true }));
 // ========================== Connect Routes ==========================
 // app.use("/api/v1", IndexRoutes);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/admin", adminRoute);
 
 // Basic route
 app.get("/", async (req: Request, res: Response) => {
@@ -52,9 +58,8 @@ app.get("/", async (req: Request, res: Response) => {
   });
 });
 
-// ======================== Global Error Handler / Not Found Handler / Other Middleware ========================
-// app.use(globalErrorHandler);
-// app.use(notFound);
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;
 

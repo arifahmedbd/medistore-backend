@@ -1,0 +1,12 @@
+model ShippingAddress {
+  id       String  @id @default(cuid())
+  orderId  String  @unique
+  fullName String
+  phone    String
+  street   String
+  city     String
+  postcode String
+  notes    String?
+  // order    Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order    Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}

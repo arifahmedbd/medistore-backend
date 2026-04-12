@@ -1,0 +1,20 @@
+model Medicine {
+  id           String   @id @default(uuid())
+  name         String
+  description  String
+  price        Float
+  stock        Int
+  manufacturer String
+  image        String?
+  createdAt    DateTime @default(now())
+
+  categoryId String
+  sellerId   String
+
+  category Category @relation(fields: [categoryId], references: [id])
+  seller   User     @relation(fields: [sellerId], references: [id])
+
+  reviews    Review[]
+  orderItems OrderItem[]
+  cartItems  CartItem[]
+}
