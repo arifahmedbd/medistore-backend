@@ -6,8 +6,6 @@ const VALID_ROLES = Object.values(Role);
 const VALID_STATUSES = Object.values(UserStatus);
 const VALID_ORDER_STATUSES = Object.values(OrderStatus);
 
-/* ───────────────────────────────────────────── */
-
 const getStats = async (_req: Request, res: Response) => {
   try {
     const result = await AdminService.getStats();
@@ -19,8 +17,6 @@ const getStats = async (_req: Request, res: Response) => {
     });
   }
 };
-
-/* ───────────────────────────────────────────── */
 
 const getUsers = async (req: Request, res: Response) => {
   try {
@@ -54,8 +50,6 @@ const getUsers = async (req: Request, res: Response) => {
   }
 };
 
-/* ───────────────────────────────────────────── */
-
 const updateUserRole = async (req: Request, res: Response) => {
   try {
     const user = req.user;
@@ -86,8 +80,6 @@ const updateUserRole = async (req: Request, res: Response) => {
       });
   }
 };
-
-/* ───────────────────────────────────────────── */
 
 const updateUserStatus = async (req: Request, res: Response) => {
   try {
@@ -123,8 +115,6 @@ const updateUserStatus = async (req: Request, res: Response) => {
   }
 };
 
-/* ───────────────────────────────────────────── */
-
 const getOrders = async (req: Request, res: Response) => {
   try {
     const page = parseInt(String(req.query.page ?? "1"), 10) || 1;
@@ -151,8 +141,6 @@ const getOrders = async (req: Request, res: Response) => {
   }
 };
 
-/* ───────────────────────────────────────────── */
-
 const getCategories = async (_req: Request, res: Response) => {
   try {
     const result = await AdminService.getCategories();
@@ -164,8 +152,6 @@ const getCategories = async (_req: Request, res: Response) => {
     });
   }
 };
-
-/* ───────────────────────────────────────────── */
 
 const createCategory = async (req: Request, res: Response) => {
   try {
@@ -184,8 +170,6 @@ const createCategory = async (req: Request, res: Response) => {
     });
   }
 };
-
-/* ───────────────────────────────────────────── */
 
 const updateCategory = async (req: Request, res: Response) => {
   try {
@@ -209,8 +193,6 @@ const updateCategory = async (req: Request, res: Response) => {
   }
 };
 
-/* ───────────────────────────────────────────── */
-
 const deleteCategory = async (req: Request, res: Response) => {
   try {
     const { categoryId } = req.params;
@@ -226,8 +208,6 @@ const deleteCategory = async (req: Request, res: Response) => {
     });
   }
 };
-
-/* ───────────────────────────────────────────── */
 
 export const AdminController = {
   getStats,

@@ -1,10 +1,6 @@
 import { Role, UserStatus } from "../../../generated/enums";
 import { prisma } from "../../../lib/prisma";
 
-/* ─────────────────────────────────────────────
-   🔹 Helpers (Reusable)
-───────────────────────────────────────────── */
-
 const ensureUserExists = async (userId: string) => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -28,10 +24,6 @@ const ensureCategoryNameUnique = async (name: string, excludeId?: string) => {
     throw new Error("Category name already exists");
   }
 };
-
-/* ─────────────────────────────────────────────
-   🔹 Dashboard
-───────────────────────────────────────────── */
 
 const getStats = async () => {
   const now = new Date();
@@ -134,10 +126,6 @@ const getStats = async () => {
   };
 };
 
-/* ─────────────────────────────────────────────
-   🔹 Users
-───────────────────────────────────────────── */
-
 const getUsers = async (params: {
   page: number;
   limit: number;
@@ -213,10 +201,6 @@ const updateUserStatus = async (userId: string, status: UserStatus) => {
   });
 };
 
-/* ─────────────────────────────────────────────
-   🔹 Orders
-───────────────────────────────────────────── */
-
 const getOrders = async (params: {
   page: number;
   limit: number;
@@ -267,10 +251,6 @@ const getOrders = async (params: {
   return { orders, total, totalPages: Math.ceil(total / limit) };
 };
 
-/* ─────────────────────────────────────────────
-   🔹 Categories
-───────────────────────────────────────────── */
-
 const getCategories = async () => {
   return await prisma.category.findMany({
     orderBy: { createdAt: "desc" },
@@ -315,8 +295,6 @@ const deleteCategory = async (id: string) => {
     where: { id },
   });
 };
-
-/* ───────────────────────────────────────────── */
 
 export const AdminService = {
   getStats,

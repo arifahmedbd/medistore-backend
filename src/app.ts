@@ -10,6 +10,7 @@ import { notFound } from "./app/middleware/notFound";
 import errorHandler from "./app/middleware/globalErrorHandler";
 import { authRoute } from "./app/modules/auth/auth.router";
 import { adminRoute } from "./app/modules/admin/admin.router";
+import { cartRoute } from "./app/modules/cart/cart.router";
 
 const app: Application = express();
 app.set("query parser", (str: string) => qs.parse(str));
@@ -44,13 +45,12 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-// ========================== Connect Routes ==========================
 // app.use("/api/v1", IndexRoutes);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/admin", adminRoute);
+app.use("/api/v1/cart", cartRoute);
 
-// Basic route
 app.get("/", async (req: Request, res: Response) => {
   res.status(201).json({
     success: true,
