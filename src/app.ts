@@ -13,6 +13,7 @@ import { adminRoute } from "./app/modules/admin/admin.router";
 import { cartRoute } from "./app/modules/cart/cart.router";
 import { sellerRoute } from "./app/modules/seller/seller.router";
 import { customerRoute } from "./app/modules/customer/customer.router";
+import { reviewRoute } from "./app/modules/review/review.router";
 
 const app: Application = express();
 app.set("query parser", (str: string) => qs.parse(str));
@@ -54,6 +55,7 @@ app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/cart", cartRoute);
 app.use("/api/v1/seller", sellerRoute);
 app.use("/api/v1/customer", customerRoute);
+app.use("/api/v1/review", reviewRoute);
 
 app.get("/", async (req: Request, res: Response) => {
   res.status(201).json({

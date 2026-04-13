@@ -278,8 +278,6 @@ const changePassword = async (
   return { success: true };
 };
 
-/* ───────────────────────────────────────────── */
-
 export const CustomerService = {
   placeOrder,
   getOrders,
