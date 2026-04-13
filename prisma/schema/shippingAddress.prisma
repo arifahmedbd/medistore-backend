@@ -7,6 +7,5 @@ model ShippingAddress {
   city     String
   postcode String
   notes    String?
-  // order    Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   order    Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
 }

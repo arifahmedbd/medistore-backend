@@ -11,6 +11,7 @@ import errorHandler from "./app/middleware/globalErrorHandler";
 import { authRoute } from "./app/modules/auth/auth.router";
 import { adminRoute } from "./app/modules/admin/admin.router";
 import { cartRoute } from "./app/modules/cart/cart.router";
+import { sellerRoute } from "./app/modules/seller/seller.router";
 
 const app: Application = express();
 app.set("query parser", (str: string) => qs.parse(str));
@@ -50,6 +51,7 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/cart", cartRoute);
+app.use("/api/v1/seller", sellerRoute);
 
 app.get("/", async (req: Request, res: Response) => {
   res.status(201).json({
