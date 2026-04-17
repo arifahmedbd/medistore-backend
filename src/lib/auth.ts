@@ -19,8 +19,8 @@ export const auth = betterAuth({
     provider: "postgresql", // or "mysql", "postgresql", ...etc
   }),
 
-  baseURL: process.env.FRONTEND_URL,
-  trustedOrigins: [process.env.FRONTEND_URL!],
+  baseURL: process.env.APP_URL,
+  trustedOrigins: [process.env.APP_URL!],
   user: {
     additionalFields: {
       role: {
