@@ -81,18 +81,10 @@ const updateOrderStatus = async (req: Request, res: Response) => {
 
 const getMedicines = async (req: Request, res: Response) => {
   try {
-    const user = req.user;
-    if (!user?.id) return res.status(401).json({ error: "Unauthorized" });
-
     const { page, limit } = parsePagination(req);
     const search = String(req.query.search ?? "");
 
-    const result = await SellerService.getMedicines(
-      user.id,
-      page,
-      limit,
-      search,
-    );
+    const result = await SellerService.getMedicines(page, limit, search);
 
     res.status(200).json(result);
   } catch (e) {
@@ -102,7 +94,21 @@ const getMedicines = async (req: Request, res: Response) => {
   }
 };
 
-/* ───────────────────────────────────────────── */
+const getMedicineById = async (req: Request, res: Response) => {
+  try {
+    const { medicineId } = req.params;
+
+    const result = await SellerService.getMedicineById(medicineId as string);
+
+    res.status(200).json(result);
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "Failed to fetch medicine";
+
+    const statusCode = message.includes("not found") ? 404 : 400;
+
+    res.status(statusCode).json({ error: message });
+  }
+};
 
 const createMedicine = async (req: Request, res: Response) => {
   try {
@@ -165,8 +171,6 @@ const updateMedicine = async (req: Request, res: Response) => {
   }
 };
 
-/* ───────────────────────────────────────────── */
-
 const deleteMedicine = async (req: Request, res: Response) => {
   try {
     const user = req.user;
@@ -199,6 +203,7 @@ export const SellerController = {
   getOrders,
   updateOrderStatus,
   getMedicines,
+  getMedicineById,
   createMedicine,
   updateMedicine,
   deleteMedicine,

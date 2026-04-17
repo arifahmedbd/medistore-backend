@@ -173,16 +173,10 @@ const updateOrderStatus = async (
   });
 };
 
-const getMedicines = async (
-  sellerId: string,
-  page = 1,
-  limit = 10,
-  search = "",
-) => {
+const getMedicines = async (page = 1, limit = 10, search = "") => {
   const { skip, take } = getPagination(page, limit);
 
   const where = {
-    sellerId,
     ...(search
       ? {
           name: {
@@ -212,6 +206,26 @@ const getMedicines = async (
     total,
     totalPages: Math.ceil(total / limit),
   };
+};
+
+const getMedicineById = async (medicineId: string) => {
+  const medicine = await prisma.medicine.findUnique({
+    where: { id: medicineId },
+    include: {
+      category: {
+        select: { name: true },
+      },
+      seller: {
+        select: { id: true, name: true, email: true },
+      },
+    },
+  });
+
+  if (!medicine) {
+    throw new Error("Medicine not found");
+  }
+
+  return medicine;
 };
 
 const createMedicine = async (
@@ -310,6 +324,7 @@ export const SellerService = {
   getOrders,
   updateOrderStatus,
   getMedicines,
+  getMedicineById,
   createMedicine,
   updateMedicine,
   deleteMedicine,

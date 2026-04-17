@@ -5,10 +5,8 @@ import { SellerController } from "./seller.controller";
 
 const router = Router();
 
-// Dashboard
 router.get("/stats", auth(Role.SELLER), SellerController.getStats);
 
-// Orders
 router.get("/orders", auth(Role.SELLER), SellerController.getOrders);
 router.patch(
   "/orders/:orderId/status",
@@ -16,8 +14,8 @@ router.patch(
   SellerController.updateOrderStatus,
 );
 
-// Medicines
-router.get("/medicines", auth(Role.SELLER), SellerController.getMedicines);
+router.get("/medicines", SellerController.getMedicines);
+router.get("/medicines/:medicineId", SellerController.getMedicineById);
 router.post("/medicines", auth(Role.SELLER), SellerController.createMedicine);
 router.patch(
   "/medicines/:medicineId",
