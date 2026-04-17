@@ -25,7 +25,7 @@ export const auth = betterAuth({
     additionalFields: {
       role: {
         type: "string",
-        defaultValue: "USER",
+        defaultValue: "CUSTOMER",
         required: false,
       },
       phone: {
@@ -137,7 +137,7 @@ export const auth = betterAuth({
     </p>
 
     <div class="footer">
-      © {{year}} MediStore. All rights reserved.<br/>
+      © ${new Date().getFullYear()} MediStore. All rights reserved.<br/>
       If you did not create this account, you can ignore this email.
     </div>
   </div>
