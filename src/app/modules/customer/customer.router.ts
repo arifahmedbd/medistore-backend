@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { CustomerController } from "./customer.controller";
 import { auth } from "../../middleware/auth";
 import { Role } from "../../../generated/enums";
+import { CustomerController } from "./customer.controller";
 
 const router = Router();
 
@@ -24,10 +24,5 @@ router.patch(
 // Profile
 router.get("/profile", auth(Role.CUSTOMER), CustomerController.getProfile);
 router.patch("/profile", auth(Role.CUSTOMER), CustomerController.updateProfile);
-router.patch(
-  "/profile/change-password",
-  auth(Role.CUSTOMER),
-  CustomerController.changePassword,
-);
 
 export const customerRoute = router;

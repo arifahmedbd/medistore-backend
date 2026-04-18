@@ -160,36 +160,6 @@ const updateProfile = async (req: Request, res: Response) => {
   }
 };
 
-const changePassword = async (req: Request, res: Response) => {
-  try {
-    const user = req.user;
-
-    if (!user?.id) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-
-    const { currentPassword, newPassword } = req.body;
-
-    if (!currentPassword || !newPassword) {
-      return res.status(400).json({
-        error: "Missing password fields",
-      });
-    }
-
-    const result = await CustomerService.changePassword(
-      user.id,
-      currentPassword,
-      newPassword,
-    );
-
-    res.status(200).json(result);
-  } catch (e) {
-    res.status(400).json({
-      error: e instanceof Error ? e.message : "Password change failed",
-    });
-  }
-};
-
 export const CustomerController = {
   placeOrder,
   getOrders,
@@ -197,5 +167,4 @@ export const CustomerController = {
   cancelOrder,
   getProfile,
   updateProfile,
-  changePassword,
 };

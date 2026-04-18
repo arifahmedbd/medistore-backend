@@ -21,7 +21,7 @@ router.patch(
 
 router.get("/orders", auth(Role.ADMIN), AdminController.getOrders);
 
-router.get("/categories", auth(Role.ADMIN), AdminController.getCategories);
+router.get("/categories", AdminController.getCategories);
 router.post("/categories", auth(Role.ADMIN), AdminController.createCategory);
 router.patch(
   "/categories/:categoryId",

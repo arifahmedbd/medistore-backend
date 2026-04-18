@@ -245,39 +245,6 @@ const updateProfile = async (
   });
 };
 
-const changePassword = async (
-  userId: string,
-  currentPassword: string,
-  newPassword: string,
-) => {
-  if (newPassword.length < 8) {
-    throw new Error("Password too short");
-  }
-
-  const account = await prisma.account.findFirst({
-    where: { userId, providerId: "credential" },
-  });
-
-  if (!account?.password) {
-    throw new Error("Password not set");
-  }
-
-  const valid = await bcrypt.compare(currentPassword, account.password);
-
-  if (!valid) {
-    throw new Error("Current password incorrect");
-  }
-
-  const hashed = await bcrypt.hash(newPassword, 12);
-
-  await prisma.account.update({
-    where: { id: account.id },
-    data: { password: hashed },
-  });
-
-  return { success: true };
-};
-
 export const CustomerService = {
   placeOrder,
   getOrders,
@@ -285,5 +252,4 @@ export const CustomerService = {
   cancelOrder,
   getProfile,
   updateProfile,
-  changePassword,
 };
