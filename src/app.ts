@@ -30,7 +30,10 @@ app.set("views", path.resolve(process.cwd(), `src/app/templates`));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.APP_URL,
+    origin: [
+      "https://medistore-frontend-inky.vercel.app",
+      "http://localhost:3000",
+    ],
     credentials: true,
     // methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     // allowedHeaders: [["Content-Type", "Authorization", "Cookie"],
